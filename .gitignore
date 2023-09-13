@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+#/build  -- we're going to have to push this folder to deploy it on Github pages
 
 # misc
 .DS_Store
