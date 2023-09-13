@@ -1,10 +1,16 @@
 import React from 'react';
-import './App.css'; // You can style your components in App.css
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>GatorAdvisor</h1>
+      <header className="App-header">
+        <h1>GatorAdvisor</h1>
+        <div className="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button>Search</button>
+        </div>
+      </header>
     </div>
   );
 }

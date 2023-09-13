@@ -1,38 +1,55 @@
+/* App.css */
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #aaffaa; /*light green background for that gator spirit*/
+  min-height: 100vh; /* i read that i should do this, not sure why yet*/
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* header with the title */
+.App-header {
+  background-color: #ff9900; /* orange background for that Gator Spirit*/
+  padding: 40px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow of the box to make it look cool*/
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* title */
+h1 {
+  color: #ffffff; /* text is white but idk maybe it should be another color*/
+  font-size: 36px;
+}
+
+/* search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+/* search input */
+input[type="text"] {
+  padding: 10px;
+  border: 2px solid #00aa00; /* green border for more of that gator spirit */
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* search button */
+button {
+  padding: 10px 20px;
+  background-color: #00aa00; /* even more green bc gators are green */
+  color: #ffffff; /* going with that text white theme*/
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect search button --> to make it stylish*/
+button:hover {
+  background-color: #009900; /* Darker green bc gator */
 }
