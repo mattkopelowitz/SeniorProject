@@ -53,3 +53,31 @@ button {
 button:hover {
   background-color: #009900; /* Darker green bc gator */
 }
+
+/* categories */
+.categories {
+  text-align: left; /* Align category buttons to the left */
+  margin-top: 20px; /* Add space above the categories */
+}
+
+/* category buttons */
+.categories button {
+  margin: 10px 0; /* Add space around each button */
+  padding: 10px 20px;
+  background-color: #00aa00; /* Green (Guess Why) */
+  color: #ffffff; /* White text theme for some reason */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for the category buttons --> always gotta have that hover effect */
+.categories button:hover {
+  background-color: #009900; /* Darker green bc Gator */
+}
+
+/* Remove bullet points from the list bc they look bad */
+.categories ul {
+  list-style-type: none;
+  padding: 0;
+}
