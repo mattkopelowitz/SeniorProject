@@ -2,12 +2,12 @@ import React from 'react';
 function GatorAdvisor() {
   const handleLoginClick = () => {
     // Navigate to the "/search" route when the login button is clicked
-    window.location.href = '/search';
+    window.location.href = '/login';
   };
 
   const handleSignupClick = () => {
     // Navigate to the "/search" route when the signup button is clicked
-    window.location.href = '/search';
+    window.location.href = '/signup';
   };
 
   return (
