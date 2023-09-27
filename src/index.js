@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+<script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+
+
 /*ReactDOM.render(
   <React.StrictMode>
     <App />
