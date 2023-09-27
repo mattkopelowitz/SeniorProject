@@ -12,7 +12,7 @@
 
 /* header with the title */
 .App-header {
-  background-color: #ff9900; /* orange background for that Gator Spirit*/
+  background-color: #FA4616; /* orange background for that Gator Spirit*/
   padding: 40px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -87,19 +87,19 @@ button:hover {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: orange;
+  background-color: #FA4616;
 }
 
 .title {
   font-family: 'Pacifico', cursive;
   font-size: 48px;
-  color: green;
+  color: #0021A5;
   margin-bottom: 20px;
   text-align: center;
 }
 
 .advisor {
-  color: orange;
+  color: #FA4616;
 }
 
 .choice {
@@ -109,7 +109,7 @@ button:hover {
 
 .login-button,
 .signup-button {
-  background-color: green;
+  background-color: #0021A5;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -121,7 +121,7 @@ button:hover {
 
 .login-button:hover,
 .signup-button:hover {
-  background-color: darkgreen;
+  background-color: #0021A5;
 }
 
 
