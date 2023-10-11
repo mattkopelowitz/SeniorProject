@@ -36,7 +36,7 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
-//server runs on a different port than front-end
+//server runs on a different port than front-end 
 const port = process.env.PORT || 3000;
 
 // Define outes and middleware here
