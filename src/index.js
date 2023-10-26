@@ -2,24 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './frontend/index.css';
 import App from './frontend/App';
+import { UserProvider } from './backend/UserContext';
 import reportWebVitals from './reportWebVitals';
 
-<script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
-
-
-/*ReactDOM.render(
-  <React.StrictMode>
+ReactDOM.render(
+  <UserProvider>
     <App />
-  </React.StrictMode>
-);*/
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  </UserProvider>,
+  document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
