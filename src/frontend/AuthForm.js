@@ -5,9 +5,6 @@ import { useUser } from '../backend/UserContext';
 import SearchPage from './SearchPage';
 
 const AuthForm = ({ formType }) => {
-  const handleSigninClick = () => {
-    window.location.href = '/search';
-  };
   const { dispatch } = useUser();
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate(); // Get the navigate function
@@ -20,13 +17,16 @@ const AuthForm = ({ formType }) => {
 
       if (formType === 'login') {
         const { user, token } = await login(formData, API_BASE_URL); // Pass the base URL
+        console.log(user)
         dispatch({ type: 'LOGIN', user, token });
+        navigate('/search');
       } else {
         const { user, token } = await signup(formData, API_BASE_URL); // Pass the base URL
         dispatch({ type: 'LOGIN', user, token });
+        navigate('/search');
       }
       // Redirect or provide feedback as needed
-      navigate('/search');
+      
     } catch (error) {
       console.error('Authentication error:', error);
       // Handle login or signup errors
@@ -60,7 +60,7 @@ const AuthForm = ({ formType }) => {
           }
         />
       )}
-      <button type="submit" onClick={handleSigninClick}>
+      <button type="submit">
         {formType === 'login' ? 'Log In' : 'Sign Up'}
       </button>
     </form>
