@@ -20,6 +20,7 @@ const AuthForm = ({ formType }) => {
       }
       // Redirect or provide feedback as needed
     } catch (error) {
+      console.error('Authentication error:', error);
       // Handle login or signup errors
     }
   };
