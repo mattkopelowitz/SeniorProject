@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavigationBar from './NavigationBar';
+import logo from '../files/logo.png';
 
 function ResultsPage() {
   const searchParams = new URLSearchParams(window.location.search);
@@ -30,9 +31,17 @@ function ResultsPage() {
     });
   };
 
+  const handleGoHome = () => {
+    // Navigate to the "/search" route when the signup button is clicked
+    window.location.href = '/';
+  };
+
+  let logoStyle = {position: 'absolute', top: '20px'};
+
   return (
-    <div>
-      <NavigationBar />
+    <div class="container">
+      <img style={logoStyle} src={logo} alt="logo"/>
+      <NavigationBar/>
       <h2>Search Results for "{searchTerm}":</h2>
       
       {/* Add a price range slider */}
@@ -74,6 +83,9 @@ function ResultsPage() {
           ))}
         </ul>
       )}
+      <div>
+        <button onClick={handleGoHome}>Home</button>
+      </div>
     </div>
   );
 }

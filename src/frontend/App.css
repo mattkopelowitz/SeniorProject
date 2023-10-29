@@ -3,18 +3,20 @@
 
 .App {
   text-align: center;
-  background-color: #aaffaa; /*light green background for that gator spirit*/
+  background-color: #FA4616;
+  //background-color: #aaffaa; /*light green background for that gator spirit*/
   min-height: 100vh; /* i read that i should do this, not sure why yet*/
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
+  padding-top: 10vh;
 }
 
 /* header with the title */
 .App-header {
-  background-color: #FA4616; /* orange background for that Gator Spirit*/
-  padding: 40px;
+  background-color: #0021A5; /* orange background for that Gator Spirit*/
+  padding: 40px 40vw;
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow of the box to make it look cool*/
@@ -43,10 +45,10 @@ input[type="text"] {
 /* search button */
 button {
   padding: 10px 20px;
-  background-color: #00aa00; /* even more green bc gators are green */
+  background-color: #0021A5; /* even more green bc gators are green */
+  border-color: white;
   color: #ffffff; /* going with that text white theme*/
-  border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -59,17 +61,32 @@ button:hover {
 .categories {
   text-align: left; /* Align category buttons to the left */
   margin-top: 20px; /* Add space above the categories */
+  display: flex;
+}
+
+.logoHeader{
+  display: flex;
+}
+
+.navbar{
+  display: flex;
+}
+
+.navbar input, button{
+  margin-top: 25%;
+  max-height: 40px;
 }
 
 /* category buttons */
 .categories button {
   margin: 10px 0; /* Add space around each button */
   padding: 10px 20px;
-  background-color: #00aa00; /* Green (Guess Why) */
+  background-color: #0021A5; /* Green (Guess Why) */
   color: #ffffff; /* White text theme for some reason */
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
 }
 
 /* Hover effect for the category buttons --> always gotta have that hover effect */
@@ -80,7 +97,10 @@ button:hover {
 /* Remove bullet points from the list bc they look bad */
 .categories ul {
   list-style-type: none;
-  padding: 0;
+  display: flex;
+}
+.categories li{
+  padding: 0px 20px;
 }
 .container {
   display: flex;
@@ -97,6 +117,10 @@ button:hover {
   color: #0021A5;
   margin-bottom: 20px;
   text-align: center;
+}
+
+input[type="text"]{
+  padding: 1px 2px;
 }
 
 .advisor {
