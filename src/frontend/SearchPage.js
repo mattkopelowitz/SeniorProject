@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavigationBar from './NavigationBar';
+import logo from '../files/logo.png';
 
 import './App.css';
 
@@ -23,11 +24,16 @@ function SearchPage() {
     setShowPopup(true);
   };
 
+  let logoStyle = {width: '200px', display: 'flex', margin: '0 20% 0 0'};
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>GatorAdvisor</h1>
+        <div className="logoHeader">
+      <img style={logoStyle} src={logo} alt="logo"/>
+        {/* <h1>GatorAdvisor</h1> */}
        <NavigationBar/>
+       </div>
       </header>
       <div className="categories">
         <h2>Categories</h2>

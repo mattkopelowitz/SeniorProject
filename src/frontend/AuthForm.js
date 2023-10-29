@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, signup } from '../backend/AuthService';
 import { useUser } from '../backend/UserContext';
+import SearchPage from './SearchPage';
 
 const AuthForm = ({ formType }) => {
+  const handleSigninClick = () => {
+    window.location.href = '/search';
+  };
   const { dispatch } = useUser();
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate(); // Get the navigate function
@@ -56,7 +60,7 @@ const AuthForm = ({ formType }) => {
           }
         />
       )}
-      <button type="submit">
+      <button type="submit" onClick={handleSigninClick}>
         {formType === 'login' ? 'Log In' : 'Sign Up'}
       </button>
     </form>

@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../files/logo.png';
 function GatorAdvisor() {
   const handleLoginClick = () => {
     // Navigate to the "/search" route when the login button is clicked
@@ -12,6 +13,7 @@ function GatorAdvisor() {
 
   return (
     <div className="container">
+      <img src={logo} alt="logo"/>
       <h1 className="title">Gator Advisor</h1>
       <div className="choice">
         <button className="login-button" onClick={handleLoginClick}>Login</button>
