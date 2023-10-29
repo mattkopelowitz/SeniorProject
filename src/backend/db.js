@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // MongoDB connection URL
-const mongoURI = 'mongodb+srv://mattkopelowitz:a3zDQ%40au4%40XaU36E@cluster0.zfsboxj.mongodb.net/'; 
+const mongoURI = 'mongodb+srv://gatoradvisor2:gatoradvisor2@cluster.mongodb.net/database'; 
 // Replace with your MongoDB URL
 
 

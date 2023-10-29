@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login, signup } from '../backend/AuthService';
 import { useUser } from '../backend/UserContext';
 
 const AuthForm = ({ formType }) => {
   const { dispatch } = useUser();
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const navigate = useNavigate(); // Get the navigate function
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +22,7 @@ const AuthForm = ({ formType }) => {
         dispatch({ type: 'LOGIN', user, token });
       }
       // Redirect or provide feedback as needed
+      navigate('/search');
     } catch (error) {
       console.error('Authentication error:', error);
       // Handle login or signup errors
@@ -26,6 +30,7 @@ const AuthForm = ({ formType }) => {
   };
 
   return (
+    <div>
     <form onSubmit={handleSubmit}>
       {/* Form fields */}
       <input
@@ -55,6 +60,7 @@ const AuthForm = ({ formType }) => {
         {formType === 'login' ? 'Log In' : 'Sign Up'}
       </button>
     </form>
+     </div>
   );
 };
 

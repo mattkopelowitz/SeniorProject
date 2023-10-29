@@ -1,17 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors'); 
-const app = express();
+const cors = require('cors');
+const bcrypt = require('bcrypt'); // for password hashing
+const jwt = require('jsonwebtoken'); // for creating JWTs
 
+const app = express();
 app.use(cors());
 
-//Connecting to database in MongoDB -> we still need to set up mongoBD though
-mongoose.connect('mongodb://localhost/my-database', { 
+// Set your MongoDB Atlas connection string
+const mongoURI = 'mongodb+srv://gatoradvisor2:gatoradvisor2@cluster0.zfsboxj.mongodb.net/userinfo';
+console.log(mongoURI)
+// Connect to MongoDB Atlas
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true, 
+  useUnifiedTopology: true,
 });
-
 
 // MongoDB schema and model (for "items" collection)
 const itemSchema = new mongoose.Schema({
@@ -22,7 +26,13 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model('Item', itemSchema);
 
-//makes it so that we can read the data held in JSON and url format in MongoDB
+// Create a User model for MongoDB
+const User = mongoose.model('User', new mongoose.Schema({
+  username: String,
+  password: String, // Passwords should be hashed and stored securely, but for simplicity, we're using plaintext here
+}));
+
+// Configure body parser and other middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -38,26 +48,21 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
-
 app.post('/signup', async (req, res) => {
   try {
     // Extract user registration data from the request body
     const { username, password } = req.body;
-
-    // Check if the username and password meet validation requirements
+    console.log(username)
+    console.log(password)
     if (!username || !password) {
       return res.status(400).json({ message: 'Username and password are required.' });
     }
 
-    // Implement user registration logic (e.g., saving user data to a database)
-    // Here, we'll simulate a successful registration
-    const newUser = {
-      username,
-      // Hash the password before saving it in a real application
-      password,
-    };
+    // Simulate user registration and save user data to the "userinfo" database
+    const newUser = new User({ username, password });
 
-    // Replace the above code with actual database operations (e.g., using Mongoose for MongoDB)
+    // Save the user to the "userinfo" database
+    await newUser.save();
 
     // Respond with a success message
     return res.status(201).json({ message: 'User registered successfully', user: newUser });
@@ -68,29 +73,25 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Find the user by their username in the database
+    // Find the user by their username in the "userinfo" database
     const user = await User.findOne({ username });
 
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    // Check if the provided password matches the hashed password in the database
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
+    // Check if the provided password matches the stored password
+    if (user.password !== password) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
     // Create and send a JSON Web Token (JWT) for authentication
-    const token = jwt.sign({ username: user.username }, 'your-secret-key');
+    const token = jwt.sign({ username: user.username }, 'security');
 
-    // You can also send the user data (without the password) if needed
     res.json({ message: 'Login successful', token, user: { username: user.username } });
   } catch (error) {
     console.error('Error during login:', error);
@@ -98,12 +99,10 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
-
-//server runs on a different port than front-end 
+//server runs on a different port than front-end
 const port = process.env.PORT || 3001;
 
-// Define outes and middleware here
+// Define routes and middleware here
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
