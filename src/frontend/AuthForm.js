@@ -28,8 +28,10 @@ const AuthForm = ({ formType }) => {
           console.error('Sign-up error:', signupError);
           if (signupError.response && signupError.response.status === 409) {
             setError('Username taken. Please choose a different username.');
-          } else {
-            setError('An error occurred during sign-up. Please try again.');
+          } else if(signupError.response && signupError.response.status === 401) {
+            setError('Please use a UFL e-mail');
+          } else if(signupError.response && signupError.response.status === 400) {
+            setError('Username and password are required');
           }
         }
       }
