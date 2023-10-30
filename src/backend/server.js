@@ -54,8 +54,14 @@ app.post('/signup', async (req, res) => {
     const { username, password } = req.body;
     console.log(username)
     console.log(password)
+    
     if (!username || !password) {
       return res.status(400).json({ message: 'Username and password are required.' });
+    }
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({ message: 'Username is already taken.' });
     }
 
     // Simulate user registration and save user data to the "userinfo" database

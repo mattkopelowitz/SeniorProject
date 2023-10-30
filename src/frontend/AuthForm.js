@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, signup } from '../backend/AuthService';
 import { useUser } from '../backend/UserContext';
-import SearchPage from './SearchPage';
 
 const AuthForm = ({ formType }) => {
   const { dispatch } = useUser();
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate(); // Get the navigate function
-
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,14 +20,23 @@ const AuthForm = ({ formType }) => {
         dispatch({ type: 'LOGIN', user, token });
         navigate('/search');
       } else {
-        const { user, token } = await signup(formData, API_BASE_URL); // Pass the base URL
-        dispatch({ type: 'LOGIN', user, token });
-        navigate('/search');
+        try {
+          const { user, token } = await signup(formData, API_BASE_URL);
+          dispatch({ type: 'LOGIN', user, token });
+          navigate('/search');
+        } catch (signupError) {
+          console.error('Sign-up error:', signupError);
+          if (signupError.response && signupError.response.status === 409) {
+            setError('Username taken. Please choose a different username.');
+          } else {
+            setError('An error occurred during sign-up. Please try again.');
+          }
+        }
       }
       // Redirect or provide feedback as needed
       
     } catch (error) {
-      console.error('Authentication error:', error);
+      setError('Invalid username or password. Please try again.');
       // Handle login or signup errors
     }
   };
@@ -64,6 +72,7 @@ const AuthForm = ({ formType }) => {
         {formType === 'login' ? 'Log In' : 'Sign Up'}
       </button>
     </form>
+    {error && <p className="error-message">{error}</p>}
      </div>
   );
 };

@@ -33,7 +33,11 @@ h1 {
   display: flex;
   align-items: center;
 }
-
+.error-message {
+  color: #0021A5;/* Red text color */
+  font-size: 20px; /* Font size */
+  margin-top: 10px; /* Add some space between the error message and the form */
+}
 /* search input */
 input[type="text"] {
   padding: 10px;
