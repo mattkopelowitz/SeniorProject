@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../files/logo.png';
+import AuthForm from "./AuthForm";
 function GatorAdvisor() {
   const handleLoginClick = () => {
     // Navigate to the "/search" route when the login button is clicked
@@ -19,6 +20,7 @@ function GatorAdvisor() {
         <button className="login-button" onClick={handleLoginClick}>Login</button>
         <button className="signup-button" onClick={handleSignupClick}>Sign Up</button>
       </div>
+      <AuthForm formType="/" />
     </div>
   );
 }
