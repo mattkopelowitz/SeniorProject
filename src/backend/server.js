@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/api/search', async (req, res) => {
   try {
     const searchTerm = req.query.term;
-    const results = await Item.find({ name: { $regex: searchTerm, $options: 'i' } }); // Case-insensitive search
+    const results = await YelpFL.Businesses.find({ name: { $regex: searchTerm, $options: 'i' } }); // Case-insensitive search
 
     res.json(results);
   } catch (error) {

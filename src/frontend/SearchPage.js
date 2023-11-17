@@ -7,6 +7,7 @@ import './App.css';
 function SearchPage() {
 
   //handles when you select a category as true or false
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -24,10 +25,16 @@ function SearchPage() {
     setShowPopup(true);
   };
 
+  const handleSearch = () => {
+    // Redirect to the ResultsPage with the search term as a query parameter
+    window.location.href = `/results?searchTerm=${searchTerm}`;
+  };
+
   let logoStyle = {width: '200px', display: 'flex', margin: '0 20% 0 0'};
 
   return (
     <div className="App">
+      
       <header className="App-header">
         <div className="logoHeader">
       <img style={logoStyle} src={logo} alt="logo"/>

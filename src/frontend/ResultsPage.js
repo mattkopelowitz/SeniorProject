@@ -33,10 +33,10 @@ function ResultsPage() {
 
   const handleGoHome = () => {
     // Navigate to the "/search" route when the signup button is clicked
-    window.location.href = '/';
+    window.location.href = '/search';
   };
 
-  let logoStyle = {position: 'absolute', top: '20px'};
+  let logoStyle = {position: 'absolute', top: '-50px'};
 
   return (
     <div class="container">

@@ -4,7 +4,6 @@
 .App {
   text-align: center;
   background-color: #FA4616;
-  //background-color: #aaffaa; /*light green background for that gator spirit*/
   min-height: 100vh; /* i read that i should do this, not sure why yet*/
   display: flex;
   flex-direction: column;
