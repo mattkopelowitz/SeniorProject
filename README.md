@@ -2,20 +2,12 @@
 
 ### Running the Project
 
-To run the backend, navigate to /src/backend/, run:
+To run the backend, navigate to /backend/, run:
 
-### `node server.js`
+### `npm run dev`
 
-To run the frontend, navigate to the project directory, run:
+To run the frontend, navigate to /frontend/, run:
 
-### `npm start`
+### `npm run dev`
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-
-
-
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Open [http://localhost](http://localhost) to the port given during compilation to view it in your browser.
