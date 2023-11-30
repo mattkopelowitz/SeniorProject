@@ -17,16 +17,27 @@ router.get('/', async(request, response)=>{
     }
 });
 
-//Gets business by ID
-router.get('/:id', async(request, response)=>{
+//Gets business by city
+router.get('/by-city/:city', async(request, response)=>{
     try{
-        const { id } = request.params;
-        const business = await Business.findById(id);
-        return response.status(200).json(business);
+        const { city } = request.params;
+        const businesses = await Business.find({city:city});
+        return response.status(200).json(businesses);
     }catch(error){
         console.log(error);
         response.status(500).send({message:error.message});
     }
 });
 
+//Gets business by Postal
+router.get('/by-postal/:postal_code', async(request, response)=>{
+    try{
+        const { postal_code } = request.params;
+        const businesses = await Business.find({postal_code:postal_code});
+        return response.status(200).json(businesses);
+    }catch(error){
+        console.log(error);
+        response.status(500).send({message:error.message});
+    }
+});
 export default router;

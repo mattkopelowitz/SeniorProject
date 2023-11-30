@@ -3,7 +3,8 @@ import {Routes, Route} from 'react-router-dom'
 import Home from './pages/home'
 import Login from './pages/login'
 import Signup from './pages/signup'
-import Search from './pages/search'
+import SearchByPostal from './pages/SearchByPostal'
+import SearchByCity from './pages/SearchByCity'
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
       <Route path='/' element={<Home />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/signup' element={<Signup />}/>
-      <Route path='/search/:id' element={<Search />}/>
+      <Route path='/search/by-city/:city' element={<SearchByCity />}/>
+      <Route path='/search/by-postal/:postal_code' element={<SearchByPostal />}/>
     </Routes>
   )
 }

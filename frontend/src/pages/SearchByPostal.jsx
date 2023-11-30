@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
-import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import {MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 
-const Home = () => {
+const SearchByPostal = () => {
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(false);
+    const {postal_code} = useParams();
     const displayValue = (value) =>{
         return value == null ? 'Null' : value;
     };
@@ -17,25 +16,22 @@ const Home = () => {
     };
     useEffect(()=>{
         setLoading(true);
-        axios.get('http://localhost:5555/Businesses')
+        axios
+        .get(`http://localhost:5555/Businesses/by-postal/${postal_code}`)
         .then((response)=>{
-            setBusinesses(response.data.data);
+            setBusinesses(response.data);
             setLoading(false);
         })
         .catch((error)=>{
             console.log(error);
             setLoading(false);
-        })
-    }, []);
-    return (
+        });
+    }, [postal_code])
+  return (
     <div className='p-4'>
-        <div className='flex justify-between items-center'>
-            <h1 className='text-3xl my-8'>Businesses</h1>
-            <Link to={`/search/${businesses._id}`}>
-                <MdOutlineAddBox className='text-black-800 text-4xl' />
-            </Link>
-        </div>
-        {loading ?(
+        <BackButton />
+        <h1 className='text-3xl my-4'>Search</h1>
+        {loading ? (
             <Spinner />
         ):(
             <table className='w-full border-separate border-spacing-2'>
@@ -124,7 +120,7 @@ const Home = () => {
             </table>
         )}
     </div>
-    )
+  )
 }
 
-export default Home
+export default SearchByPostal
