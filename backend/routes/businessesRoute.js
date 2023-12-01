@@ -3,38 +3,27 @@ import { Business } from '../models/yelpBusinessModel.js';
 
 const router = express.Router();
 
-//Gets all businesses in the database
+//Gets all businesses matching the query
 router.get('/', async(request, response)=>{
     try{
-        const businesses = await Business.find({});
+        let query = {};
+        if(request.query.name){
+            query.name = {$regex: new RegExp(request.query.name, 'i')};
+        }
+        if(request.query.city){
+            query.city = {$regex: new RegExp(request.query.city, 'i')};
+        }
+        if(request.query.postal_code){
+            query.postal_code = request.query.postal_code;
+        }
+        if(request.query.categories){
+            query.categories = {$regex: new RegExp(request.query.categories, 'i')};
+        }
+        const businesses = await Business.find(query);
         return response.status(200).json({
             count: businesses.length,
             data: businesses
         });
-    }catch(error){
-        console.log(error);
-        response.status(500).send({message:error.message});
-    }
-});
-
-//Gets business by city
-router.get('/by-city/:city', async(request, response)=>{
-    try{
-        const { city } = request.params;
-        const businesses = await Business.find({city:city});
-        return response.status(200).json(businesses);
-    }catch(error){
-        console.log(error);
-        response.status(500).send({message:error.message});
-    }
-});
-
-//Gets business by Postal
-router.get('/by-postal/:postal_code', async(request, response)=>{
-    try{
-        const { postal_code } = request.params;
-        const businesses = await Business.find({postal_code:postal_code});
-        return response.status(200).json(businesses);
     }catch(error){
         console.log(error);
         response.status(500).send({message:error.message});

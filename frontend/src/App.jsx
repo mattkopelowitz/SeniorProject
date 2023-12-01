@@ -1,10 +1,9 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom'
-import Home from './pages/home'
-import Login from './pages/login'
-import Signup from './pages/signup'
-import SearchByPostal from './pages/SearchByPostal'
-import SearchByCity from './pages/SearchByCity'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Search from './pages/Search'
 
 const App = () => {
   return (
@@ -12,8 +11,7 @@ const App = () => {
       <Route path='/' element={<Home />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/signup' element={<Signup />}/>
-      <Route path='/search/by-city/:city' element={<SearchByCity />}/>
-      <Route path='/search/by-postal/:postal_code' element={<SearchByPostal />}/>
+      <Route path='/search' element={<Search />}/>
     </Routes>
   )
 }

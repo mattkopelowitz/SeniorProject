@@ -1,116 +1,75 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
+import { Link } from 'react-router-dom';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { BsInfoCircle } from 'react-icons/bs';
+import {MdOutlineAddBox, MdOutlineDelete, MdSearch } from 'react-icons/md'
+import BusinessesTable from '../components/home/BusinessesTable';
+import BusinessesCard from '../components/home/BusinessesCard';
+import Navigation from '../components/Navigation';
 
 const Search = () => {
-    const [business, setBusiness] = useState({});
+    const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(false);
-    const {id} = useParams();
-    const displayValue = (value) =>{
-        return value == null ? 'Null' : value;
-    };
-    const isOpen = (value) =>{
-        return value == 1 ? "Yes" : "No";
-    };
-    useEffect(()=>{
-        setLoading(true);
-        axios
-        .get(`http://localhost:5000/Businesses/${id}`)
-        .then((response)=>{
-            setBusiness(response.data);
-            setLoading(false);
-        })
-        .catch((error)=>{
-            console.log(error);
-            setLoading(false);
-        });
-    }, [])
-  return (
-    <div className='p-4'>
-        <BackButton />
-        <h1 className='text-3xl my-4'>Search</h1>
-        {loading ? (
+    const [showType, setShowType] = useState('card');
+    const [search, setSearch] = useState('');
+    const [searchCriteria, setSearchCriteria] = useState('name');
+
+    const handleSearchChange = (event) =>{
+        setSearch(event.target.value);
+    }
+    const handleCriteria = (event) =>{
+        setSearchCriteria(event.target.value);
+    }
+    const handleSearch = (event) =>{
+        event.preventDefault();
+        if(search.trim() !== ''){
+            setLoading(true);
+            axios.get(`http://localhost:5555/Businesses?${searchCriteria}=${search}`)
+            .then((response)=>{
+                setBusinesses(response.data.data);
+                setLoading(false);
+            })
+            .catch((error)=>{
+                console.log(error);
+                setLoading(false);
+            })
+        }else{
+            console.log("No search string");
+        }
+    }
+    return (
+    <div className='p-4 bg-blue-900'>
+        <div className='flex justify-between items-center'>
+            <Navigation />
+        </div>
+        <div className='my-4 flex justify-center items-center flex-col'>
+                <form onSubmit={handleSearch} className='flex'>
+                    <select value={searchCriteria} onChange={handleCriteria} className='border-2 border-orange-600 text-orange-950 rounded-2xl mr-2 bg-blue-300 hover:bg-blue-400 hover:border-white'>
+                        <option value="name">Name</option>
+                        <option value="city">City</option>
+                        <option value="postal_code">Postal Code</option>
+                        <option value="categories">Category</option>
+                    </select>
+                    <input type="text" value={search} onChange={handleSearchChange} placeholder='Search' className='border-2 border-orange-600 bg-blue-300 text-black rounded-2xl px-2 mr-2 w-96 hover:bg-blue-400 hover:border-white'/>
+                    <button type="submit" className='bg-white border-2 border-orange-950 rounded-3xl hover:bg-blue-300 hover:text-orange-600 hover:border-orange-600'>
+                        <MdSearch className='text-black-800 text-4xl' />
+                    </button>
+                </form>
+        </div>
+        <div className='flex justify-center'>
+            <button className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 mr-2 rounded-3xl' onClick={()=>setShowType('card')}>Cards</button>
+            <button className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 mr-2 rounded-3xl' onClick={()=>setShowType('table')}>Table</button>
+        </div>
+        {loading ?(
             <Spinner />
         ):(
-            <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Name</span>
-                    <span>{business.name}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Address</span>
-                    <span>{business.address}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>City</span>
-                    <span>{business.city}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>State</span>
-                    <span>{business.state}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Postal</span>
-                    <span>{business.postal_code}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Latitude</span>
-                    <span>{business.latitude}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Longitude</span>
-                    <span>{business.longitude}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Stars</span>
-                    <span>{business.stars}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Reviews</span>
-                    <span>{business.review_count}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Is Open</span>
-                    <span>{isOpen(business.is_open)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Categories</span>
-                    <span>{business.categories}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Monday</span>
-                    <span>{displayValue(business.hours?.Monday)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Tuesday</span>
-                    <span>{displayValue(business.hours?.Tuesday)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Wednesday</span>
-                    <span>{displayValue(business.hours?.Wednesday)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Thursday</span>
-                    <span>{displayValue(business.hours?.Thursday)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Friday</span>
-                    <span>{displayValue(business.hours?.Friday)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Saturday</span>
-                    <span>{displayValue(business.hours?.Saturday)}</span>
-                </div>
-                <div className='my-4'>
-                    <span className='text-xl mr-4 text-gray-500'>Sunday</span>
-                    <span>{displayValue(business.hours?.Sunday)}</span>
-                </div>
-            </div>
+            showType === 'table' ? (<BusinessesTable businesses={businesses} />) : (<BusinessesCard businesses={businesses} />)
         )}
+
     </div>
-  )
+    )
 }
 
 export default Search
