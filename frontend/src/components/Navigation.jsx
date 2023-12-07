@@ -9,7 +9,7 @@ const Navigation = () => {
         <div className='flex gap-x-2'>
             <a href = "/"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Home</button></a>
             <a href = "/search"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Search</button></a>
-            <a href = "/login"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Login</button></a>
+            <a href = "/loginregister"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Login/Register</button></a>
         </div>
     </div>
   )
