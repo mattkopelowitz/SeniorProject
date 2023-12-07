@@ -8,7 +8,7 @@ const Navigation = () => {
         <h1 className='text-center font-bold text-orange-300 text-7xl italic font-serif'>Gator Advisor</h1>
         <div className='flex gap-x-2'>
             <a href = "/search"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Search</button></a>
-            <a href = "/loginregister"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Login/Register</button></a>
+            <a href = "/"><button href="/" className='bg-orange-300 hover:bg-orange-600 font-bold px-20 py-2 rounded'>Login/Register</button></a>
         </div>
     </div>
   )

@@ -58,7 +58,7 @@ const Login = () => {
       });
 
       console.log('Registration response:', response.data);
-      setSignupError('');
+      setSignupError('Registration Success!');
     } catch (error) {
       console.error('Registration failed:', error);
 
