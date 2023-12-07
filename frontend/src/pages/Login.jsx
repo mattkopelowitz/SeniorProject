@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
 import Navigation from '../components/Navigation';
-import {useHistory} from 'react-router-dom';
 
 const Login = () => {
-  const history = useHistory();
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
@@ -34,7 +32,6 @@ const Login = () => {
 
       // if there was ever an error for logging in, it will clear up now that it worked
       setLoginError('Login Successful');
-      window.location.href = '/Search';
     } catch (error) {
       console.error('Login failed:', error);
       setLoginError('Invalid username or password');
