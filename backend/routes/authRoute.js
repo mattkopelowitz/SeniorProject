@@ -45,10 +45,10 @@ router.post('/login', async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-
-    res.json({ token });
+    if(passwordMatch){
+      const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+      res.json({ success: true, token: token });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });

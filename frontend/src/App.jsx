@@ -7,8 +7,7 @@ import Search from './pages/Search'
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />}/>
-      <Route path='/loginregister' element={<Login />}/>
+      <Route path='/' element={<Login />}/>
       <Route path='/search' element={<Search />}/>
     </Routes>
   )
