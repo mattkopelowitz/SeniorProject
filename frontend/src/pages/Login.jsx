@@ -31,7 +31,7 @@ const Login = () => {
 
 
       // if there was ever an error for logging in, it will clear up now that it worked
-      setLoginError('');
+      setLoginError('Login Successful');
     } catch (error) {
       console.error('Login failed:', error);
       setLoginError('Invalid username or password');
